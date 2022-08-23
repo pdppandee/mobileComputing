@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+    margin: 0px; padding: 0px;
+  }
+
+  body {
+    font-family: 'Sarabun' ,Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+  }
+
+.box{
+    background-color: antiquewhite;
+    padding: 15px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+  .grid-container > fieldset {
+    padding: 20px;      
+}
+
+fieldset{
+    padding: 20px;    
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+    <link rel="stylesheet" href="hw2.css">
+    <title>taxcalculate</title>
+</head>
+<body>
+    <div class="box">
+        <br>
+        <h2 style="text-align: center;">คำนวณรายได้ภาษีบุคคลธรรมดา</h2>
+        <br>
+        <!-- <form class="grid-container">
+            <fieldset>
+                <legend>รายได้:</legend>
+                <label >รายได้ (บาท):</label>
+                <input type="text" id="income"><br><br>
+                <button onclick="addIncome()">Add</button>
+            </fieldset>
+            <fieldset>
+                <legend>****</legend>
+                <label>รายได้รวม: </label>
+                <p style="display: inline;" id="summary">*****</p><br>
+                <label>อัตราภาษี %: </label>
+                <p style="display: inline;" id="">*****</p><br>
+                <label> ภาษีที่ต้องจ่าย (บาท): </label>
+                <p style="display: inline;" id="">*****</p><br>
+            </fieldset>
+        </form> -->
+        <fieldset>
+            <legend> รายได้: </legend>
+            <label> รายได้ (บาท): </label>
+            <input type = "text" id = "income" class ="income" name="income" laceholder="Enter income" ><br><br>
+            <div id = "newIncome"></div>
+
+            <button onclick = "addIncome()"> Add </button>
+            <button onclick = "deleteIncome()"> Clear </button>
+            <button onclick = "sumIncome()"> Submit</button>
+        </fieldset>
+     
+        <fieldset>
+            <legend>****</legend>
+            <label>รายได้รวม: </label>
+            <p style="display: inline;" id="summary">*****</p><br>
+            <label>อัตราภาษี %: </label>
+            <p style="display: inline;" id="">*****</p><br>
+            <label> ภาษีที่ต้องจ่าย (บาท): </label>
+            <p style="display: inline;" id="">*****</p><br>
+        </fieldset>
+
+        
+    </div>
+
+    <!-- <form oninput="vat.value=parseFloat(sale.value)*7/100;">  
+        <label>Enter First Value.</label><br>  
+        <input type="number" name="sale" value=""/><br>  
+         
+        Output is:<output name="vat"></output>  
+     </form>  
+     -->
+</body>
+</html>
+<script src="hw2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
