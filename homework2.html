@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tax: Js Homework </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylehw2.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+</head>
+
+<body>
+    <header>โปรแกรมคำนวณภาษีรายได้บุคคลธรรมดา</header>
+    <div class="row">
+        <div class="column">
+            <div class="input_form">
+                <label for="" class="income_text">รายได้(บาท): </label><br>
+                <input type="number" min=0 id="income_input" class="someInput">
+                <button id="add_input" class="button add_input" onclick="addIncome()">+</button>
+                <button id="rem_input" class="button rem_input" onclick="removeIncome()">-</button><br>
+                <div id="snackbar_add_success" class="snackbar">คุณได้เพิ่มช่องทำรายการเต็มสูงสุด 3 รายการแล้ว</div>
+                <div id="snackbar_income" class="snackbar">โปรดระบุรายได้ให้ถูกต้อง</div>
+                <div id="child_income"></div>
+                <button id="sum_tax" class="button sum_tax" onclick="calTaxReport()">คำนวณ</button>
+            </div>
+        </div>    
+        <div class="column">
+            <div class="report">
+                <label for="" class="total_income">รายได้รวม(บาท): </label>
+                <p id="total_income_report"></p>
+                <label for="" class="tax_ratio">อัตราภาษี(%): </label>
+                <p id="tax_ratio_report"></p>
+                <label for="" class="tax_pay">ภาษีที่ต้องจ่าย(บาท): </label>
+                <p id="tax_pay_report"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var max_fields = 3;
+        var cnt = 1;
+
+        function addIncome(){
+            if(cnt >= max_fields){
+                var x = document.getElementById("snackbar_add_success");
+                x.className = "snackbar show1";
+                setTimeout(function(){ x.className = x.className.replace("show1", ""); }, 3000);
+                return
+            }
+            cnt++; 
+            var newIncome = document.createElement("input");
+            newIncome.setAttribute("type", "number");
+            newIncome.setAttribute("min", 0);
+            newIncome.setAttribute("id", "income"+cnt);
+            newIncome.setAttribute("class", "someInput")
+            document.getElementById("child_income").appendChild(newIncome); 
+        }
+
+        function removeIncome(){
+            var childs = document.getElementsByClassName("someInput");
+            if (childs.length > 0){
+                document.getElementById("child_income").removeChild(childs[childs.length - 1]);
+                cnt--;
+            }
+            calTaxReport();
+        }
+
+        function calTaxReport(){
+            var childs = document.getElementsByClassName("someInput");
+            var totalIncome = parseFloat(document.getElementById("income_input").value);
+            if(totalIncome<=0 || isNaN(totalIncome)){
+                var x = document.getElementById("snackbar_income");
+                x.className = "snackbar show1";
+                setTimeout(function(){ x.className = x.className.replace("show1", ""); }, 3000);
+                document.getElementById("income_input").value = "";
+                clearOutput();
+                return
+            }
+
+            for(var i=1; i<cnt; i++){
+                let y = parseFloat(childs[i].value);
+                if (y<=0 || isNaN(y)) {
+                    var x = document.getElementById("snackbar_income");
+                    x.className = "snackbar show1";
+                    setTimeout(function(){ x.className = x.className.replace("show1", ""); }, 3000);
+                    childs[i].value = "";
+                    clearOutput();
+                    return
+                }
+                totalIncome += parseFloat(childs[i].value);
+            }
+            document.getElementById("total_income_report").innerHTML = totalIncome
+            console.log(totalIncome);
+
+            let feeRate = 0
+
+            if (totalIncome <= 150000) {
+                document.getElementById('tax_ratio_report').innerHTML = "ได้รับการยกเว้น";
+                feeRate = 0;
+            }
+            else if (totalIncome <= 300000) {
+                document.getElementById('tax_ratio_report').innerHTML = 5;
+                feeRate = 5;
+            }
+            else if (totalIncome <= 500000) {
+                document.getElementById('tax_ratio_report').innerHTML = 10;
+                feeRate = 10;
+            }
+            else if (totalIncome <= 750000) {
+                document.getElementById('tax_ratio_report').innerHTML = 15;
+                feeRate = 15;
+            }
+            else if (totalIncome <= 1000000) {
+                document.getElementById('tax_ratio_report').innerHTML = 20;
+                feeRate = 20;
+            }
+            else if (totalIncome <= 2000000) {
+                document.getElementById('tax_ratio_report').innerHTML = 25;
+                feeRate = 25;
+            }
+            else if (totalIncome <= 5000000) {
+                document.getElementById('tax_ratio_report').innerHTML = 30;
+                feeRate = 30;
+            }
+            else {
+                document.getElementById('tax_ratio_report').innerHTML = 35;
+                feeRate = 35;
+            }
+            document.getElementById("tax_pay_report").innerHTML = totalIncome*feeRate/100;
+        }
+
+        function clearOutput(){
+            document.getElementById("total_income_report").innerHTML = "";
+            document.getElementById('tax_ratio_report').innerHTML = "";
+            document.getElementById("tax_pay_report").innerHTML = "";
+        }
+
+    </script>
+</body>
+</html>
